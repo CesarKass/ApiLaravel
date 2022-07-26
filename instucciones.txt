@@ -1,0 +1,26 @@
+//add a composer.json
+"firebase/php-jwt": "^3.0.0"
+
+//ejecutar
+composer update
+
+//Crear Helper
+
+//ejecutar cmd
+php artisan make:provider JwtAuthServiceProvider
+
+
+
+//para iamgenes se crea una carpeta en el storage y en la clase usando "disk" y en App\config\filesystems
+
+
+
+//Cors para peticiones ajax en /public/index.php (al inicio)
+header('Access-Control-Allow-Origin: *');	//ponemos url del front en caso de ser especifico
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+$method = $_SERVER['REQUEST_METHOD'];
+if($method == "OPTIONS") {
+	die();
+}
