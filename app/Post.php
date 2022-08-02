@@ -8,6 +8,12 @@ class Post extends Model
 {
     protected $table = 'posts';
 
+    protected $fillable = [
+        'title', 
+        'content', 
+        'category_id', 
+        'image'
+    ];
 
     //n a 1
     public function user(){

@@ -107,7 +107,7 @@ class PostController extends Controller
         
         if(!empty($params) && !empty($paramsArray)){
 
-            $paramsArray = array_map('trim', $paramsArray);
+            // $paramsArray = array_map('trim', $paramsArray);
             
             $validateData = \Validator::make($paramsArray, [ 
                 'category_id' => 'required',
@@ -127,9 +127,10 @@ class PostController extends Controller
                  
                 unset($paramsArray['id']);
                 unset($paramsArray['user_id']);
+                unset($paramsArray['category']);
                 unset($paramsArray['created_at']);
     
-                $post_update = Post::where('id', $id)->updateOrCreate($paramsArray);
+                $post_update = Post::where('id', $id)->update($paramsArray);
 
                 $data = array(
                     'status' => 'success', 
@@ -159,7 +160,9 @@ class PostController extends Controller
         $token = $request->header('Authorization', null);
         $user = $jwtAuth->checkToken($token, true);
         //Buscar elemento, validar existencia y eliminar 
-        $Post = Post::find($id)->where('user_id', $user->sub)->first() ;
+        // $Post = Post::find($id)->where('user_id', $user->sub)->first();
+        $Post = Post::where('id', '=', $id);
+        
         if(!empty($Post)){
             $Post->delete();
             $data = [
