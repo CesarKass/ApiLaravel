@@ -164,7 +164,8 @@ class UserController extends Controller
             $data = array(
                 'status' => 'error',
                 'message' => 'No se pudo subir la imagen',
-                'code' => 400 
+                'code' => 400,
+                'error' => $validateData->errors()
             );
         }else{
             $image_name = time().$image->getClientOriginalName();
